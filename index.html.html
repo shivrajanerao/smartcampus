@@ -1,0 +1,1428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#310b1b">
+<title>CampusX AI | Gramin Smart Campus</title>
+<style>
+:root{
+--bg:#210814;--panel:#351021;--panel2:#48152b;
+--text:#fff5f3;--muted:#d9b8c4;--gold:#ffd166;
+--pink:#ff719b;--line:#704055;--white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+margin:0;background:var(--bg);color:var(--text);
+font-family:system-ui,-apple-system,Arial,sans-serif;
+line-height:1.55;overflow-wrap:anywhere
+}
+body:before{
+content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+background:
+radial-gradient(ellipse at 90% 10%,#9b204640,transparent 38%),
+radial-gradient(ellipse at 5% 55%,#5c143440,transparent 35%);
+}
+button,input,select,textarea{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,
+select:focus-visible,textarea:focus-visible{
+outline:2px solid var(--gold);outline-offset:3px
+}
+.wrap{width:min(1180px,92%);margin:auto}
+header{
+position:sticky;top:0;z-index:20;
+background:#210814ed;backdrop-filter:blur(16px);
+border-bottom:1px solid var(--line)
+}
+.nav{
+min-height:72px;display:flex;align-items:center;
+justify-content:space-between;gap:12px
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900}
+.brand-icon{
+width:43px;height:43px;border-radius:14px;display:grid;
+place-items:center;background:var(--gold);color:#351021;
+font-size:20px;font-weight:1000
+}
+.brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--gold)}
+.nav-actions{display:flex;gap:8px;align-items:center}
+.btn{
+border:1px solid var(--line);border-radius:12px;padding:11px 15px;
+background:var(--panel);color:var(--text);font-weight:700;
+display:inline-flex;justify-content:center;align-items:center;gap:7px
+}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:#321020}
+.btn-pink{background:var(--pink);border-color:var(--pink);color:#300b1c}
+.small-btn{padding:8px 11px}
+.hero{padding:35px 0 22px}
+.hero-card{
+border:1px solid #b67b4b;border-radius:28px;
+padding:clamp(22px,5vw,52px);
+background:linear-gradient(125deg,#075b30,#08713b 53%,#063b29);
+box-shadow:0 0 0 5px #ffd16622,0 18px 50px #0004;
+position:relative;overflow:hidden
+}
+.hero-card:after{
+content:"";position:absolute;width:300px;height:300px;
+border:35px solid #ffffff0d;border-radius:50%;
+right:-110px;top:-70px;pointer-events:none
+}
+.eyebrow{font-size:11px;letter-spacing:2.5px;color:var(--gold);font-weight:900}
+.hero h1{font-size:clamp(35px,7vw,70px);line-height:1.03;margin:14px 0;letter-spacing:-2px}
+.hero h1 span{color:var(--gold)}
+.hero p{max-width:620px;color:#f8e8e8}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-badge{
+display:inline-flex;gap:8px;align-items:center;border:1px solid #ffffff50;
+border-radius:30px;padding:8px 13px;font-size:12px;margin-bottom:15px
+}
+.section{padding:26px 0}
+.section-head{
+display:flex;justify-content:space-between;align-items:end;gap:15px;
+margin-bottom:16px
+}
+.section-head h2{font-size:clamp(23px,4vw,32px);margin:4px 0}
+.section-head p{color:var(--muted);font-size:12px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.card{
+min-width:0;background:linear-gradient(145deg,var(--panel),#2a0c1c);
+border:1px solid var(--line);border-radius:20px;padding:20px;
+box-shadow:0 10px 25px #0002
+}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{color:var(--muted);font-size:13px;margin:6px 0 14px}
+.card-icon{
+width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+background:#ffd16618;border:1px solid #ffd16650;font-size:22px
+}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;gap:10px}
+.tag{font-size:10px;letter-spacing:1px;color:var(--gold);border:1px solid var(--line);padding:5px 9px;border-radius:20px}
+label{display:block;font-size:12px;color:var(--muted);margin:12px 0 5px}
+input,select,textarea{
+width:100%;min-width:0;border:1px solid var(--line);
+border-radius:11px;padding:12px;background:#200a17;color:var(--text)
+}
+input::placeholder,textarea::placeholder{color:#bda1ae}
+textarea{min-height:85px;resize:vertical}
+.row-input{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.actions .btn{flex:1}
+.result{
+white-space:pre-line;margin-top:12px;padding:12px;
+border:1px solid var(--line);border-radius:12px;
+font-size:13px;color:var(--text);overflow-wrap:anywhere
+}
+.result:empty{display:none}
+.list{list-style:none;margin:10px 0;padding:0}
+.list li{
+display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);
+padding:10px 0;font-size:13px
+}
+.list li span{flex:1;min-width:0;white-space:pre-wrap}
+.list li button{border:0;background:transparent;color:var(--gold);padding:5px}
+.progress{height:8px;background:#ffffff20;border-radius:9px;overflow:hidden;margin-top:12px}
+.progress span{height:100%;width:0;display:block;background:var(--gold)}
+.wide{grid-column:span 2}.full{grid-column:1/-1}
+.muted{color:var(--muted);font-size:12px}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:28px 0;color:var(--muted);font-size:12px;text-align:center}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap nav">
+<a class="brand" href="#home">
+<span class="brand-icon">CX</span>
+<span>CampusX AI<small>SMART CAMPUS · 2026</small></span>
+</a>
+<div class="nav-actions">
+<button class="btn small-btn" onclick="toggleTheme()" aria-label="Change theme">◐ Theme</button>
+<a href="#tools" class="btn btn-gold small-btn">Explore ↗</a>
+</div>
+</div>
+</header>
+<main class="wrap">
+  
+<section class="hero" id="home">
+  <div class="hero-card">
+    <div class="hero-badge">✦ GRAMIN CAMPUS · STUDENT PROJECT</div>
+    <div class="eyebrow">YOUR CAMPUS. YOUR FUTURE.</div>
+    <h1>Learn smarter.<br><span>Dream bigger.</span></h1>
+    <p>One digital space for academics, attendance, live weather, study planning and student productivity.</p>
+    <div class="hero-buttons">
+      <a href="#tools" class="btn btn-gold">Explore Student Tools ↗</a>
+      <a href="#weather" class="btn">Live Weather ☁</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="campus">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">CAMPUS CONNECT</div>
+      <h2>Gramin Campus Hub</h2>
+    </div>
+    <span class="tag">STUDENT EDITION</span>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="card-top"><div class="card-icon">🎓</div><span class="tag">UNIVERSITY</span></div>
+      <h3>DBATU Connect</h3>
+      <p>Quick access to university information and student resources.</p>
+      <a class="btn btn-gold" href="https://dbatu.ac.in/" target="_blank" rel="noopener noreferrer">DBATU Website ↗</a>
+    </article>
+    <article class="card">
+      <div class="card-top"><div class="card-icon">🏫</div><span class="tag">COLLEGE</span></div>
+      <h3>Gramin College</h3>
+      <p>Verify your department, timetable, examination notices and official college rules with the college office.</p>
+      <a class="btn" href="https://www.google.com/search?q=Gramin+College+of+Engineering+Nanded+official" target="_blank" rel="noopener noreferrer">Find College Information ↗</a>
+    </article>
+    <article class="card">
+      <div class="card-top"><div class="card-icon">📚</div><span class="tag">LEARNING</span></div>
+      <h3>Free Study Resources</h3>
+      <p>Explore learning materials and online courses.</p>
+      <div class="actions">
+        <a class="btn small-btn" href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer">SWAYAM ↗</a>
+        <a class="btn small-btn" href="https://nptel.ac.in/" target="_blank" rel="noopener noreferrer">NPTEL ↗</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="tools">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">YOUR DIGITAL TOOLKIT</div>
+      <h2>Student Tools</h2>
+    </div>
+    <span class="tag">ALL IN ONE</span>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="card-top"><div class="card-icon">🎓</div><span class="tag">GRADES</span></div>
+      <h3>SGPA Calculator</h3>
+      <p>Add subject credits and grade points.</p>
+      <label>Subject name</label><input id="sgName" placeholder="Mathematics">
+      <div class="row-input">
+        <div><label>Credits</label><input id="sgCredit" type="number" min="0.1" step="any" placeholder="4"></div>
+        <div><label>Grade points</label><input id="sgGrade" type="number" min="0" max="10" step="any" placeholder="8"></div>
+      </div>
+      <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="addSG()">Add Subject</button>
+      <ul class="list" id="sgList"></ul>
+      <div class="result" id="sgResult">Your SGPA will appear here.</div>
+      <button class="btn small-btn" style="width:100%" onclick="resetSG()">Reset</button>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><div class="card-icon">📈</div><span class="tag">GRADES</span></div>
+      <h3>CGPA Calculator</h3>
+      <p>Estimate CGPA from semester SGPA values.</p>
+      <label>Semester SGPA (0–10)</label>
+      <div class="row-input">
+        <input id="cgInput" type="number" min="0" max="10" step="any" placeholder="8.2">
+        <button class="btn btn-gold" onclick="addCG()">Add</button>
+      </div>
+      <ul class="list" id="cgList"></ul>
+      <div class="result" id="cgResult">Your CGPA will appear here.</div>
+      <button class="btn small-btn" style="width:100%" onclick="resetCG()">Reset</button>
+      <p class="muted">Estimate only. Official CGPA may use credit weighting.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><div class="card-icon">📊</div><span class="tag">ATTENDANCE</span></div>
+      <h3>Attendance Calculator</h3>
+      <p>Calculate attendance and lectures needed for your target.</p>
+      <label>Lectures attended</label><input id="attended" type="number" min="0" placeholder="32">
+      <label>Total lectures held</label><input id="totalClasses" type="number" min="1" placeholder="40">
+      <label>Target attendance (%)</label><input id="targetAtt" type="number" min="1" max="100" value="75">
+      <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="calcAttendance()">Calculate</button>
+      <div class="progress"><span id="attBar"></span></div>
+      <div class="result" id="attResult"></div>
+    </article>
+  </div>
+</section>
+  
+<section class="section" id="weather">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">LIVE WEATHER · WORLD CITIES</div>
+      <h2>Weather Explorer</h2>
+    </div>
+    <span class="tag">NO API KEY</span>
+  </div>
+
+  <div class="card full" id="weatherCard" style="background:#111015;color:#fff;border-color:#554451">
+    <div class="searchbar" style="display:flex;gap:8px">
+      <input id="city" value="Nanded" placeholder="Search city..." aria-label="City name" style="background:#201c24;color:#fff">
+      <button class="btn btn-gold" onclick="getWeather()">Search</button>
+    </div>
+    <div id="weatherStatus" class="muted" style="margin-top:14px" aria-live="polite">Ready to load weather.</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:20px 0">
+      <div>
+        <div id="weatherLocation" style="font-size:14px;color:#e8d6e5">Nanded</div>
+        <div id="weatherTemp" style="font-size:clamp(45px,10vw,76px);font-weight:900;line-height:1.2">--°C</div>
+        <div id="weatherDescription">Current conditions</div>
+        <p id="weatherDetails" style="color:#c8bbc9;font-size:12px"></p>
+      </div>
+      <div id="weatherEmoji" style="font-size:clamp(55px,13vw,90px)">🌤️</div>
+    </div>
+
+    <hr style="border-color:#39313d">
+    <div class="section-head"><h3>Next 7 Days</h3><span class="tag">FORECAST</span></div>
+    <div id="forecastGrid" class="forecast-grid">
+      <div class="forecast-item">Loading...</div>
+    </div>
+    <hr style="border-color:#39313d">
+    <div class="section-head"><h3>Explore Cities</h3><span class="muted">Tap a city</span></div>
+    <div class="city-grid">
+      <button class="city-tile" onclick="selectWeatherCity('Nanded')"><span>🌤️</span><b>Nanded</b><small>View weather ↗</small></button>
+      <button class="city-tile" onclick="selectWeatherCity('Mumbai')"><span>🌦️</span><b>Mumbai</b><small>View weather ↗</small></button>
+      <button class="city-tile" onclick="selectWeatherCity('Pune')"><span>☀️</span><b>Pune</b><small>View weather ↗</small></button>
+      <button class="city-tile" onclick="selectWeatherCity('Delhi')"><span>☁️</span><b>Delhi</b><small>View weather ↗</small></button>
+      <button class="city-tile" onclick="selectWeatherCity('London')"><span>🌧️</span><b>London</b><small>View weather ↗</small></button>
+      <button class="city-tile" onclick="selectWeatherCity('Tokyo')"><span>⛅</span><b>Tokyo</b><small>View weather ↗</small></button>
+    </div>
+    <p style="color:#c8bbc9;font-size:11px;margin-top:20px">Weather data from Open-Meteo. Requires internet. Forecast and current conditions may occasionally be unavailable.</p>
+  </div>
+</section>
+
+<section class="section" id="campusRules">
+  <div class="section-head">
+    <div><div class="eyebrow">CAMPUS AWARENESS</div><h2>Campus Smart Guide</h2></div>
+    <span class="tag">STUDENT SAFETY</span>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="card-top"><div class="card-icon">🪪</div><span class="tag">ID CARD</span></div>
+      <h3>Carry Your Identity Card</h3>
+      <p>Keep your valid college ID card with you. Follow campus entry and security instructions.</p>
+      <div class="result">Before leaving: ID card · College essentials · Timetable</div>
+    </article>
+    <article class="card">
+      <div class="card-top"><div class="card-icon">📵</div><span class="tag">PHONE POLICY</span></div>
+      <h3>Mobile Phone Awareness</h3>
+      <p>Follow your college's current rules about mobile phones at the gate, in classrooms and during examinations.</p>
+      <div class="result">Check the latest official instructions with the college office. Do not rely on unofficial rumours.</div>
+    </article>
+    <article class="card">
+      <div class="card-top"><div class="card-icon">📢</div><span class="tag">REMINDERS</span></div>
+      <h3>Official Notice Reminder</h3>
+      <p>Use the personal reminder board below for assignment deadlines, exams and document tasks.</p>
+      <a href="#notices" class="btn btn-gold">Open Reminders ↓</a>
+    </article>
+  </div>
+</section>
+  
+<style>
+.forecast-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.forecast-item{min-width:0;text-align:center;padding:12px 4px;background:#211c25;border:1px solid #443848;border-radius:12px;color:#fff;font-size:12px}
+.forecast-item .day{color:#d7c8d9;font-size:10px}
+.forecast-item .symbol{font-size:23px;margin:9px 0}
+.forecast-item .high{font-weight:900}
+.forecast-item .low,.forecast-item .rain{font-size:10px;color:#c9b7cd;margin-top:5px}
+.city-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.city-tile{display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:13px;background:#211c25;color:white;border:1px solid #443848;border-radius:12px;text-align:left}
+.city-tile span{font-size:23px}
+.city-tile small{color:#c9b7cd;font-size:10px}
+@media(max-width:600px){
+.forecast-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.city-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+
+<section class="section" id="planner">
+  <div class="section-head"><div><div class="eyebrow">PLAN YOUR SUCCESS</div><h2>Study Planner</h2></div></div>
+  <div class="grid">
+    <article class="card">
+      <div class="card-top"><div class="card-icon">🗓️</div><span class="tag">PLANNER</span></div>
+      <h3>Daily Study Plan</h3>
+      <label>Study task</label><input id="planName" placeholder="Revise C programming">
+      <div class="row-input">
+        <div><label>Date</label><input id="planDate" type="date"></div>
+        <div><label>Time</label><input id="planTime" type="time" value="19:00"></div>
+      </div>
+      <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="addPlan()">Add Plan</button>
+      <ul class="list" id="planList"></ul>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><div class="card-icon">📚</div><span class="tag">DEADLINES</span></div>
+      <h3>Assignment Tracker</h3>
+      <label>Assignment name</label><input id="taskName" placeholder="Engineering Mathematics">
+      <label>Due date</label><input id="taskDate" type="date">
+      <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="addTask()">Add Assignment</button>
+      <ul class="list" id="taskList"></ul>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><div class="card-icon">⏱️</div><span class="tag">FOCUS</span></div>
+      <h3>Focus Timer</h3>
+      <label>Minutes (1–180)</label><input id="timerMinutes" type="number" min="1" max="180" value="25">
+      <div id="timerDisplay" style="font-size:48px;font-weight:900;text-align:center;padding:15px">25:00</div>
+      <div class="actions">
+        <button class="btn btn-gold" onclick="startTimer()">Start</button>
+        <button class="btn" onclick="pauseTimer()">Pause</button>
+        <button class="btn" onclick="resetTimer()">Reset</button>
+      </div>
+      <div class="result" id="timerMessage">Ready to focus.</div>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><div class="card-icon">📝</div><span class="tag">REVISION</span></div>
+      <h3>Quick Notes</h3>
+      <label>Note title</label><input id="noteTitle" placeholder="C Programming">
+      <label>Note content</label><textarea id="noteText" placeholder="Write important revision points..."></textarea>
+      <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="addNote()">Save Note</button>
+      <ul class="list" id="noteList"></ul>
+    </article>
+
+    <article class="card" id="notices">
+      <div class="card-top"><div class="card-icon">📣</div><span class="tag">REMINDERS</span></div>
+      <h3>Personal Notice Board</h3>
+      <p>Save your own reminders. This is not an official college notice feed.</p>
+      <label>Reminder</label><input id="noticeText" placeholder="Submit assignment on Friday">
+      <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="addNotice()">Add Reminder</button>
+      <ul class="list" id="noticeList"></ul>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><div class="card-icon">✅</div><span class="tag">TASKS</span></div>
+      <h3>To-do List</h3>
+      <label>Task</label><input id="todoText" placeholder="Revise 5 programs">
+      <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="addTodo()">Add Task</button>
+      <ul class="list" id="todoList"></ul>
+    </article>
+
+    <article class="card full" id="ai">
+      <div class="card-top"><div class="card-icon">🤖</div><span class="tag">AI READY</span></div>
+      <h3>Campus AI Study Assistant</h3>
+      <p>Connect your existing AI backend to ask academic questions.</p>
+      <label>Backend URL</label><input id="aiEndpoint" type="url" placeholder="Paste your HTTPS backend URL">
+      <label>Your study question</label><textarea id="aiQuestion" placeholder="Explain if-else in C in simple English..."></textarea>
+      <button class="btn btn-gold" onclick="saveAISettings()">Save URL</button>
+      <button class="btn btn-pink" onclick="askAI()">Ask Campus AI</button>
+      <div class="result" id="aiResult">Configure a working AI backend to get answers.</div>
+      <p class="muted">Do not put secret API keys in public website code. The backend must support browser requests.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card full">
+    <div class="eyebrow">STUDENT FIRST</div>
+    <h2>Build good habits, one day at a time.</h2>
+    <p>Use your study planner, track attendance, verify official notices and follow campus rules.</p>
+    <div class="hero-buttons">
+      <a class="btn btn-gold" href="#tools">Academic Tools ↑</a>
+      <a class="btn" href="#campusRules">Campus Guide ↑</a>
+      <a class="btn" href="#home">Back to Top ↑</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  
+<!-- CAMPUSX AI: SCHOLARSHIP CENTER -->
+<style>
+.scholarship-section{padding:35px 0}
+.scholarship-section .scholarship-banner{
+  padding:25px;border-radius:22px;
+  background:linear-gradient(130deg,#28101d,#4a1830);
+  border:1px solid #79506a;color:#fff;
+  margin-bottom:20px
+}
+.scholarship-section .scholarship-banner h2{
+  color:#ffd36a;font-size:clamp(25px,6vw,38px);
+  margin:12px 0
+}
+.scholarship-section .scholarship-card{
+  background:#24121d;color:#fff;
+  border:1px solid #684257;border-radius:18px;
+  padding:19px;min-width:0
+}
+.scholarship-section .scholarship-card h3{
+  color:#ffd36a;margin:12px 0
+}
+.scholarship-section .scholarship-card p,
+.scholarship-section .scholarship-card li{
+  line-height:1.7;color:#e8d8e2;font-size:14px
+}
+.scholarship-section .scholarship-card ul{
+  padding-left:20px
+}
+.scholarship-section .scholarship-tag{
+  display:inline-block;border:1px solid #886074;
+  border-radius:30px;padding:5px 10px;
+  color:#ffd36a;font-size:11px
+}
+.scholarship-section .scholarship-link{
+  display:block;text-align:center;text-decoration:none;
+  background:#ffd36a;color:#321020;
+  border-radius:10px;padding:12px;margin-top:12px;
+  font-weight:800;overflow-wrap:anywhere
+}
+.scholarship-section .scholarship-secondary{
+  background:transparent;color:#ffd36a;
+  border:1px solid #886074
+}
+.scholarship-section .scholarship-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px
+}
+.scholarship-section input,
+.scholarship-section select{
+  display:block;width:100%;min-width:0;
+  padding:12px;margin:7px 0 15px;
+  background:#170b12;color:#fff;
+  border:1px solid #76516a;border-radius:10px
+}
+.scholarship-section .scholarship-result{
+  padding:14px;margin-top:12px;border-radius:12px;
+  background:#351c2b;color:#fff;line-height:1.7;
+  overflow-wrap:anywhere
+}
+@media(max-width:700px){
+  .scholarship-section .scholarship-grid{
+    grid-template-columns:minmax(0,1fr)
+  }
+}
+</style>
+
+<section class="section scholarship-section" id="scholarships">
+  <div class="scholarship-banner">
+    <span class="scholarship-tag">STUDENT FINANCIAL SUPPORT · 2026</span>
+    <h2>🎓 Scholarship Center</h2>
+    <p>Find scholarship schemes, check basic eligibility, prepare documents and visit official application portals.</p>
+    <a class="btn btn-gold" href="#scholarshipChecker">Check Eligibility ↓</a>
+  </div>
+
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">MAHARASHTRA STUDENTS</div>
+      <h2>Scholarship & Freeship Schemes</h2>
+    </div>
+    <span class="tag">OFFICIAL LINKS</span>
+  </div>
+
+  <div class="scholarship-grid">
+    <article class="scholarship-card">
+      <span class="scholarship-tag">OBC · POST-MATRIC</span>
+      <h3>Post-Matric Scholarship to OBC Students</h3>
+      <p>For eligible OBC students pursuing education after Class 10. Benefits depend on the official scheme conditions.</p>
+      <ul>
+        <li>Check annual family income criteria.</li>
+        <li>Verify course and college eligibility.</li>
+        <li>Check maintenance allowance conditions.</li>
+      </ul>
+      <a class="scholarship-link" href="https://mahadbt2.maharashtra.gov.in/" target="_blank" rel="noopener noreferrer">Apply / Check Portal ↗</a>
+      <a class="scholarship-link scholarship-secondary" href="https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51AB02E984835E89FEFDB316E301CE6A991F41C5D42B01A7D7E" target="_blank" rel="noopener noreferrer">Scheme Details ↗</a>
+    </article>
+
+    <article class="scholarship-card">
+      <span class="scholarship-tag">OBC · FEE SUPPORT</span>
+      <h3>Tuition Fees & Examination Fees</h3>
+      <p>Fee reimbursement for eligible OBC students in approved courses and institutions.</p>
+      <ul>
+        <li>Check CAP admission conditions.</li>
+        <li>Check college approval and fee rules.</li>
+        <li>Confirm the applicable reimbursement.</li>
+      </ul>
+      <a class="scholarship-link" href="https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51A8311355D6F13BE56" target="_blank" rel="noopener noreferrer">Official Scheme Details ↗</a>
+      <a class="scholarship-link scholarship-secondary" href="https://mahadbt2.maharashtra.gov.in/" target="_blank" rel="noopener noreferrer">Application Portal ↗</a>
+    </article>
+
+    <article class="scholarship-card">
+      <span class="scholarship-tag">HOSTEL / LIVING SUPPORT</span>
+      <h3>Dr. Panjabrao Deshmukh Scheme</h3>
+      <p>Explore eligible student maintenance and accommodation support schemes listed on MahaDBT.</p>
+      <ul>
+        <li>Check the correct scheme under DTE.</li>
+        <li>Verify income and admission conditions.</li>
+        <li>Check hostel and residence requirements.</li>
+      </ul>
+      <a class="scholarship-link" href="https://mahadbt2.maharashtra.gov.in/" target="_blank" rel="noopener noreferrer">Find Scheme & Apply ↗</a>
+    </article>
+
+    <article class="scholarship-card">
+      <span class="scholarship-tag">PRIVATE SCHOLARSHIP</span>
+      <h3>Tata Capital Pankh</h3>
+      <p>Explore the scholarship programme for eligible students from economically challenged backgrounds. Check the current application window.</p>
+      <a class="scholarship-link" href="https://www.tatacapital.com/sustainability/education.html" target="_blank" rel="noopener noreferrer">Official Information ↗</a>
+    </article>
+
+    <article class="scholarship-card">
+      <span class="scholarship-tag">SCHOLARSHIP SEARCH</span>
+      <h3>Vidyasaarathi</h3>
+      <p>Search for available education funding opportunities and read each scholarship's eligibility conditions.</p>
+      <a class="scholarship-link" href="https://www.vidyasaarathi.co.in/" target="_blank" rel="noopener noreferrer">Explore Opportunities ↗</a>
+    </article>
+
+    <article class="scholarship-card">
+      <span class="scholarship-tag">PRIVATE SCHEME</span>
+      <h3>LIC Golden Jubilee</h3>
+      <p>Review official scholarship notifications, eligibility requirements and application dates.</p>
+      <a class="scholarship-link" href="https://web.licindia.in/web/guest/golden-jubilee-foundation" target="_blank" rel="noopener noreferrer">Official LIC Information ↗</a>
+    </article>
+  </div>
+
+  <div class="card full" id="scholarshipChecker" style="margin-top:22px">
+    <div class="eyebrow">PERSONAL CHECKLIST</div>
+    <h2>Scholarship Eligibility Assistant</h2>
+    <p>Fill in your details to get a basic checklist. This is not an official eligibility decision.</p>
+
+    <label for="schCategory">Category</label>
+    <select id="schCategory">
+      <option value="">Select category</option>
+      <option value="OBC">OBC</option>
+      <option value="SC">SC</option>
+      <option value="ST">ST</option>
+      <option value="VJNT">VJNT</option>
+      <option value="SBC">SBC</option>
+      <option value="OPEN">Open / Other</option>
+    </select>
+
+    <label for="schCourse">Current education</label>
+    <select id="schCourse">
+      <option value="">Select course</option>
+      <option value="engineering">First Year Engineering</option>
+      <option value="diploma">Diploma</option>
+      <option value="degree">Other Degree Course</option>
+      <option value="other">Other Course</option>
+    </select>
+
+    <label for="schIncome">Annual family income</label>
+    <select id="schIncome">
+      <option value="">Select income range</option>
+      <option value="1">Below ₹1 lakh</option>
+      <option value="2">₹1 lakh–₹2.5 lakh</option>
+      <option value="3">Above ₹2.5 lakh</option>
+    </select>
+
+    <label for="schAdmission">Admission type</label>
+    <select id="schAdmission">
+      <option value="">Select admission type</option>
+      <option value="CAP">CAP admission</option>
+      <option value="OTHER">Other admission route</option>
+      <option value="UNKNOWN">Not sure</option>
+    </select>
+
+    <button type="button" class="btn btn-gold"
+      style="width:100%;margin-top:10px"
+      onclick="checkScholarship()">
+      Generate My Checklist
+    </button>
+
+    <div class="scholarship-result" id="schResult" aria-live="polite">
+      Your checklist will appear here.
+    </div>
+  </div>
+
+  <div class="card full" style="margin-top:18px">
+    <div class="card-top">
+      <div class="card-icon">📄</div>
+      <span class="tag">DOCUMENT PREPARATION</span>
+    </div>
+    <h3>Documents to Keep Ready</h3>
+    <ul>
+      <li>Aadhaar card and Aadhaar-linked bank details, as required.</li>
+      <li>Valid caste certificate and caste validity, where applicable.</li>
+      <li>Current-year income certificate, if required by the scheme.</li>
+      <li>Previous examination marksheets.</li>
+      <li>Admission receipt, bonafide certificate and fee receipt.</li>
+      <li>CAP allotment letter, if applicable.</li>
+      <li>Domicile certificate and other documents requested by the portal.</li>
+    </ul>
+    <p class="muted">The exact list differs by scheme and student. Confirm the current document requirements with your college scholarship section.</p>
+    <a class="btn btn-gold" href="https://mahadbt2.maharashtra.gov.in/" target="_blank" rel="noopener noreferrer">Open MahaDBT 2.0 ↗</a>
+  </div>
+</section>
+
+<script>
+function checkScholarship() {
+  const category = document.getElementById("schCategory").value;
+  const course = document.getElementById("schCourse").value;
+  const income = document.getElementById("schIncome").value;
+  const admission = document.getElementById("schAdmission").value;
+  const result = document.getElementById("schResult");
+
+  if (!category || !course || !income || !admission) {
+    result.textContent = "Please select all four details to generate your checklist.";
+    return;
+  }
+
+  const lines = [
+    "Your basic scholarship checklist:",
+    "Category: " + category,
+    "Course: " + document.getElementById("schCourse").selectedOptions[0].text,
+    "",
+    "Next steps:",
+    "1. Sign in to the official MahaDBT portal.",
+    "2. Find schemes for your category and course.",
+    "3. Compare the published income, admission and college conditions.",
+    "4. Confirm the scheme with your college scholarship office."
+  ];
+
+  if (category === "OBC") {
+    lines.push("", "Check Post-Matric Scholarship to OBC Students and Tuition Fees and Examination Fees to OBC Students.");
+  } else {
+    lines.push("", "Select the scheme for your chosen category on the official portal.");
+  }
+
+  if (income === "1") {
+    lines.push("Your selected income range is below ₹1 lakh. Keep your valid income certificate ready if required.");
+  } else if (income === "2") {
+    lines.push("Your selected income range is ₹1 lakh–₹2.5 lakh. Verify the exact income limit of each scheme.");
+  } else {
+    lines.push("Your selected income is above ₹2.5 lakh. Check the income criteria carefully for every scheme.");
+  }
+
+  if (admission === "CAP") {
+    lines.push("Keep your CAP allotment letter ready if the scheme requires it.");
+  } else if (admission === "OTHER") {
+    lines.push("Confirm whether your admission route is accepted under the selected scheme.");
+  } else {
+    lines.push("Confirm your admission-route requirements with your college.");
+  }
+
+  lines.push("", "Important: This checklist does not confirm eligibility or scholarship approval.");
+  result.textContent = lines.join("\n");
+}
+</script>
+<!-- END SCHOLARSHIP CENTER -->
+
+  <div class="wrap">
+    <strong style="color:var(--gold)">CampusX AI · Smart Campus 2026</strong>
+    <p>Independent student project · Not an official DBATU or college website.</p>
+    <p>Verify university information, college policies and notices with the relevant official authority.</p>
+  </div>
+</footer>
+  
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const STORAGE = "campusx_gr2026_";
+
+function store(key, value) {
+  try { localStorage.setItem(STORAGE + key, JSON.stringify(value)); return true; }
+  catch (e) { return false; }
+}
+function restore(key, fallback) {
+  try {
+    const value = localStorage.getItem(STORAGE + key);
+    return value === null ? fallback : JSON.parse(value);
+  } catch (e) { return fallback; }
+}
+function saveString(key, value) {
+  try { localStorage.setItem(STORAGE + key, value); return true; }
+  catch (e) { return false; }
+}
+function readString(key) {
+  try { return localStorage.getItem(STORAGE + key) || ""; }
+  catch (e) { return ""; }
+}
+function message(id, text) {
+  $(id).textContent = text;
+}
+function numberInput(id, min, max) {
+  const raw = $(id).value.trim();
+  const n = Number(raw);
+  if (raw === "" || !Number.isFinite(n) || n < min || n > max) return null;
+  return n;
+}
+function safeDeleteButton(callback) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.textContent = "✕";
+  b.setAttribute("aria-label", "Delete item");
+  b.addEventListener("click", callback);
+  return b;
+}
+function renderList(id, items, label, remove, toggle) {
+  const ul = $(id);
+  ul.replaceChildren();
+  if (!items.length) {
+    const li = document.createElement("li");
+    li.textContent = "Nothing added yet.";
+    ul.append(li);
+    return;
+  }
+  items.forEach((item, index) => {
+    const li = document.createElement("li");
+    if (toggle) {
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = !!item.done;
+      checkbox.style.width = "18px";
+      checkbox.addEventListener("change", () => toggle(index, checkbox.checked));
+      li.append(checkbox);
+    }
+    const span = document.createElement("span");
+    span.textContent = label(item);
+    if (item.done) span.style.textDecoration = "line-through";
+    li.append(span, safeDeleteButton(() => remove(index)));
+    ul.append(li);
+  });
+}
+
+/* THEME */
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+  saveString("lightTheme", document.body.classList.contains("light-theme") ? "1" : "0");
+}
+if (readString("lightTheme") === "1") document.body.classList.add("light-theme");
+
+/* SGPA */
+let subjects = [];
+function addSG() {
+  const name = $("sgName").value.trim();
+  const credits = numberInput("sgCredit", 0.1, 100);
+  const grade = numberInput("sgGrade", 0, 10);
+  if (!name || credits === null || grade === null) {
+    message("sgResult", "Enter a subject, credits and grade points from 0 to 10.");
+    return;
+  }
+  subjects.push({name, credits, grade});
+  $("sgName").value = "";
+  $("sgCredit").value = "";
+  $("sgGrade").value = "";
+  renderSG();
+}
+function renderSG() {
+  const ul = $("sgList");
+  ul.replaceChildren();
+  subjects.forEach((s, i) => {
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    span.textContent = `${s.name} · ${s.credits} credits · Grade ${s.grade}`;
+    li.append(span, safeDeleteButton(() => {
+      subjects.splice(i, 1);
+      renderSG();
+    }));
+    ul.append(li);
+  });
+  if (!subjects.length) {
+    message("sgResult", "Your SGPA will appear here.");
+    return;
+  }
+  const credits = subjects.reduce((sum, s) => sum + s.credits, 0);
+  const points = subjects.reduce((sum, s) => sum + s.credits * s.grade, 0);
+  message("sgResult", `Estimated SGPA: ${(points / credits).toFixed(2)} / 10\nTotal credits: ${credits}`);
+}
+function resetSG() {
+  subjects = [];
+  renderSG();
+}
+
+/* CGPA */
+let semesters = [];
+function addCG() {
+  const v = numberInput("cgInput", 0, 10);
+  if (v === null) {
+    message("cgResult", "Enter a semester SGPA from 0 to 10.");
+    return;
+  }
+  semesters.push(v);
+  $("cgInput").value = "";
+  renderCG();
+}
+function renderCG() {
+  renderList("cgList", semesters,
+    (v, i) => `Semester ${i + 1}: ${v.toFixed(2)}`,
+    i => { semesters.splice(i, 1); renderCG(); });
+  if (!semesters.length) {
+    message("cgResult", "Your CGPA will appear here.");
+    return;
+  }
+  const avg = semesters.reduce((a, b) => a + b, 0) / semesters.length;
+  message("cgResult", `Estimated CGPA: ${avg.toFixed(2)} / 10\nEqual weighting assumed.`);
+}
+function resetCG() {
+  semesters = [];
+  renderCG();
+}
+
+/* ATTENDANCE */
+function calcAttendance() {
+  const attended = numberInput("attended", 0, 1000000);
+  const total = numberInput("totalClasses", 1, 1000000);
+  const target = numberInput("targetAtt", 1, 100);
+  if (attended === null || total === null || target === null || attended > total) {
+    message("attResult", "Enter valid attendance values. Attended cannot exceed total.");
+    return;
+  }
+  const pct = attended / total * 100;
+  $("attBar").style.width = Math.min(100, pct) + "%";
+  let result = `Current attendance: ${pct.toFixed(2)}%`;
+  if (pct >= target) {
+    const canMiss = Math.floor((attended * 100 / target) - total);
+    result += `\nYou meet your ${target}% target.`;
+    if (canMiss > 0) result += `\nMathematically, up to ${canMiss} more missed classes before falling below target.`;
+  } else if (target < 100) {
+    const needed = Math.ceil((target * total - 100 * attended) / (100 - target));
+    result += `\nAttend the next ${needed} consecutive classes to reach ${target}%.`;
+  } else {
+    result += "\nAttend every future class to reach 100%.";
+  }
+  message("attResult", result);
+}
+
+/* LIVE WEATHER: OPEN-METEO, NO API KEY */
+function weatherIcon(code) {
+  if (code === 0) return "☀️";
+  if (code <= 2) return "🌤️";
+  if (code === 3) return "☁️";
+  if (code === 45 || code === 48) return "🌫️";
+  if (code <= 67) return "🌧️";
+  if (code <= 77) return "❄️";
+  if (code <= 82) return "🌦️";
+  if (code >= 95) return "⛈️";
+  return "🌡️";
+}
+function weatherText(code) {
+  if (code === 0) return "Clear sky";
+  if (code <= 2) return "Partly cloudy";
+  if (code === 3) return "Overcast";
+  if (code === 45 || code === 48) return "Fog";
+  if (code <= 55) return "Drizzle";
+  if (code <= 67) return "Rain";
+  if (code <= 77) return "Snow";
+  if (code <= 82) return "Rain showers";
+  if (code >= 95) return "Thunderstorm";
+  return "Current conditions";
+}
+async function getWeather() {
+  const city = $("city").value.trim();
+  const status = $("weatherStatus");
+  if (!city) {
+    status.textContent = "Enter a city name first.";
+    return;
+  }
+  status.textContent = "Loading current weather and forecast...";
+  $("forecastGrid").replaceChildren();
+
+  try {
+    const geourl = "https://geocoding-api.open-meteo.com/v1/search?name=" +
+      encodeURIComponent(city) + "&count=1&language=en&format=json";
+    const gr = await fetch(geourl);
+    if (!gr.ok) throw new Error("City search failed.");
+    const gd = await gr.json();
+    if (!gd.results || !gd.results.length) throw new Error("City not found. Try another spelling.");
+    const p = gd.results[0];
+
+    const url = "https://api.open-meteo.com/v1/forecast?latitude=" +
+      p.latitude + "&longitude=" + p.longitude +
+      "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m" +
+      "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max" +
+      "&timezone=auto&forecast_days=7";
+
+    const r = await fetch(url);
+    if (!r.ok) throw new Error("Weather service unavailable.");
+    const data = await r.json();
+    const c = data.current;
+    const d = data.daily;
+
+    $("weatherLocation").textContent = p.name + (p.admin1 ? ", " + p.admin1 : "") + (p.country ? ", " + p.country : "");
+    $("weatherTemp").textContent = Math.round(c.temperature_2m) + "°C";
+    $("weatherEmoji").textContent = weatherIcon(c.weather_code);
+    $("weatherDescription").textContent = weatherText(c.weather_code);
+    $("weatherDetails").textContent =
+      "Feels like " + Math.round(c.apparent_temperature) + "°C · Humidity " +
+      c.relative_humidity_2m + "% · Wind " + c.wind_speed_10m + " km/h";
+    status.textContent = "Local time: " + c.time.replace("T", " ");
+
+    d.time.forEach((date, i) => {
+      const item = document.createElement("div");
+      item.className = "forecast-item";
+      const day = document.createElement("div");
+      day.className = "day";
+      day.textContent = i === 0 ? "Today" :
+        new Date(date + "T12:00:00").toLocaleDateString("en-IN", {weekday:"short"});
+      const icon = document.createElement("div");
+      icon.className = "symbol";
+      icon.textContent = weatherIcon(d.weather_code[i]);
+      const high = document.createElement("div");
+      high.className = "high";
+      high.textContent = Math.round(d.temperature_2m_max[i]) + "°";
+      const low = document.createElement("div");
+      low.className = "low";
+      low.textContent = Math.round(d.temperature_2m_min[i]) + "° low";
+      const rain = document.createElement("div");
+      rain.className = "rain";
+      rain.textContent = "Rain " + (d.precipitation_probability_max[i] ?? 0) + "%";
+      item.append(day, icon, high, low, rain);
+      $("forecastGrid").append(item);
+    });
+  } catch (e) {
+    status.textContent = "Weather unavailable: " + e.message + " Check internet and try again.";
+    $("weatherTemp").textContent = "--°C";
+  }
+}
+function selectWeatherCity(city) {
+  $("city").value = city;
+  getWeather();
+}
+$("city").addEventListener("keydown", e => {
+  if (e.key === "Enter") getWeather();
+});
+</script>
+  
+<style>
+body.light-theme{
+--bg:#fff7f4;--panel:#ffffff;--panel2:#fff0f3;
+--text:#321020;--muted:#785a68;--line:#e6cbd5;
+}
+body.light-theme:before{
+background:radial-gradient(ellipse at 90% 10%,#ffc5d640,transparent 40%)
+}
+body.light-theme .card{
+background:linear-gradient(145deg,#fff,#fff3f5)
+}
+body.light-theme input,body.light-theme select,body.light-theme textarea{
+background:#fff;color:#321020
+}
+</style>
+
+<script>
+/* STUDY PLANNER */
+let plans = restore("plans", []);
+function renderPlans() {
+  renderList("planList", plans,
+    p => `${p.name} · ${p.date || "No date"} · ${p.time || ""}`,
+    i => { plans.splice(i, 1); store("plans", plans); renderPlans(); });
+}
+function addPlan() {
+  const name = $("planName").value.trim();
+  if (!name) return alert("Enter a study task.");
+  plans.push({name, date:$("planDate").value, time:$("planTime").value});
+  store("plans", plans);
+  $("planName").value = "";
+  renderPlans();
+}
+
+/* ASSIGNMENTS */
+let tasks = restore("tasks", []);
+function renderTasks() {
+  renderList("taskList", tasks,
+    t => `${t.done ? "✓ " : ""}${t.name} · Due: ${t.date || "Not set"}`,
+    i => { tasks.splice(i, 1); store("tasks", tasks); renderTasks(); },
+    (i, done) => { tasks[i].done = done; store("tasks", tasks); renderTasks(); });
+}
+function addTask() {
+  const name = $("taskName").value.trim();
+  if (!name) return alert("Enter an assignment name.");
+  tasks.push({name, date:$("taskDate").value, done:false});
+  store("tasks", tasks);
+  $("taskName").value = "";
+  renderTasks();
+}
+
+/* NOTES */
+let notes = restore("notes", []);
+function renderNotes() {
+  renderList("noteList", notes,
+    n => `${n.title}: ${n.text}`,
+    i => { notes.splice(i, 1); store("notes", notes); renderNotes(); });
+}
+function addNote() {
+  const title = $("noteTitle").value.trim();
+  const text = $("noteText").value.trim();
+  if (!title || !text) return alert("Enter both title and note.");
+  notes.push({title, text});
+  store("notes", notes);
+  $("noteTitle").value = "";
+  $("noteText").value = "";
+  renderNotes();
+}
+
+/* PERSONAL REMINDERS */
+let notices = restore("notices", []);
+function renderNotices() {
+  renderList("noticeList", notices,
+    n => n.text,
+    i => { notices.splice(i, 1); store("notices", notices); renderNotices(); });
+}
+function addNotice() {
+  const text = $("noticeText").value.trim();
+  if (!text) return alert("Enter a reminder.");
+  notices.unshift({text});
+  store("notices", notices);
+  $("noticeText").value = "";
+  renderNotices();
+}
+
+/* TO-DO */
+let todos = restore("todos", []);
+function renderTodos() {
+  renderList("todoList", todos,
+    t => t.text,
+    i => { todos.splice(i, 1); store("todos", todos); renderTodos(); },
+    (i, done) => { todos[i].done = done; store("todos", todos); renderTodos(); });
+}
+function addTodo() {
+  const text = $("todoText").value.trim();
+  if (!text) return alert("Enter a task.");
+  todos.push({text, done:false});
+  store("todos", todos);
+  $("todoText").value = "";
+  renderTodos();
+}
+
+/* FOCUS TIMER */
+let remaining = 25 * 60;
+let timer = null;
+function updateTimer() {
+  $("timerDisplay").textContent =
+    String(Math.floor(remaining / 60)).padStart(2, "0") + ":" +
+    String(remaining % 60).padStart(2, "0");
+}
+function pauseTimer() {
+  if (timer !== null) clearInterval(timer);
+  timer = null;
+  message("timerMessage", "Timer paused.");
+}
+function resetTimer() {
+  pauseTimer();
+  let minutes = numberInput("timerMinutes", 1, 180);
+  if (minutes === null) {
+    $("timerMinutes").value = 25;
+    minutes = 25;
+  }
+  remaining = Math.round(minutes * 60);
+  updateTimer();
+  message("timerMessage", "Ready to focus.");
+}
+function startTimer() {
+  if (timer !== null) return;
+  if (remaining <= 0) resetTimer();
+  message("timerMessage", "Focus session running...");
+  timer = setInterval(() => {
+    remaining--;
+    updateTimer();
+    if (remaining <= 0) {
+      clearInterval(timer);
+      timer = null;
+      message("timerMessage", "Session complete! Take a short break.");
+      alert("CampusX AI: Focus session complete!");
+    }
+  }, 1000);
+}
+$("timerMinutes").addEventListener("change", () => {
+  if (timer === null) resetTimer();
+});
+
+/* AI BACKEND CONNECTION */
+$("aiEndpoint").value = readString("aiEndpoint");
+function saveAISettings() {
+  const endpoint = $("aiEndpoint").value.trim();
+  if (!endpoint) {
+    message("aiResult", "Paste your backend URL first.");
+    return;
+  }
+  try {
+    const u = new URL(endpoint);
+    if (u.protocol !== "https:" && u.hostname !== "localhost") {
+      message("aiResult", "Use a secure HTTPS URL.");
+      return;
+    }
+  } catch (e) {
+    message("aiResult", "Enter a valid URL.");
+    return;
+  }
+  if (saveString("aiEndpoint", endpoint)) {
+    message("aiResult", "Backend URL saved in this browser.");
+  } else {
+    message("aiResult", "Could not save URL. Check browser storage.");
+  }
+}
+async function askAI() {
+  const question = $("aiQuestion").value.trim();
+  const endpoint = readString("aiEndpoint");
+  if (!question) {
+    message("aiResult", "Type your question first.");
+    return;
+  }
+  if (!endpoint) {
+    message("aiResult", "Paste and save your AI backend URL first.");
+    return;
+  }
+  message("aiResult", "Connecting to Campus AI...");
+  try {
+    const response = await fetch(endpoint, {
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=UTF-8"},
+      body:JSON.stringify({question})
+    });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const data = await response.json();
+    const answer = data.answer || data.response || data.text;
+    if (typeof answer !== "string" || !answer.trim()) {
+      throw new Error("Backend did not return an answer.");
+    }
+    message("aiResult", answer);
+  } catch (e) {
+    message("aiResult",
+      "AI connection failed. Check backend deployment, request format, permissions and CORS. Details: " + e.message);
+  }
+}
+
+/* INITIALISE */
+function initialiseCampusX() {
+  const today = new Date().toLocaleDateString("en-CA");
+  $("planDate").value = today;
+  $("taskDate").value = today;
+  renderSG();
+  renderCG();
+  renderPlans();
+  renderTasks();
+  renderNotes();
+  renderNotices();
+  renderTodos();
+  updateTimer();
+  getWeather();
+}
+initialiseCampusX();
+</script>
+  
+<style>
+/* CAMPUSX AI — MOBILE LAYOUT FIX */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.wrap {
+  width: 94%;
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Stop cards from becoming narrow */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.grid > *,
+.card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.card h3,
+.card p,
+.card label,
+.card .btn {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Buttons should not split every few letters */
+.btn {
+  min-width: 0;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+input, textarea, select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Header fix */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.brand {
+  min-width: 0;
+  flex: 1 1 170px;
+}
+
+.brand small {
+  letter-spacing: 1.5px;
+}
+
+.nav-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nav-actions .btn {
+  white-space: nowrap;
+}
+
+/* Tablet */
+@media (max-width: 850px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wide {
+    grid-column: span 2;
+  }
+
+  .full {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Mobile — one card per row */
+@media (max-width: 600px) {
+  .wrap {
+    width: 92%;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px;
+  }
+
+  .grid > *,
+  .wide,
+  .full {
+    grid-column: 1 / -1 !important;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 18px;
+  }
+
+  .card-top {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .card h3 {
+    font-size: 19px;
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .card .btn {
+    min-height: 44px;
+    padding: 11px 13px;
+  }
+
+  .row-input {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .nav {
+    align-items: center;
+  }
+
+  .nav-actions {
+    width: 100%;
+  }
+
+  .nav-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .hero {
+    padding-top: 20px;
+  }
+
+  .hero-card {
+    padding: 23px 18px;
+    border-radius: 22px;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 10vw, 48px);
+    letter-spacing: -1px;
+  }
+
+  .section {
+    padding: 19px 0;
+  }
+
+  .section-head {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .forecast-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .city-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .actions {
+    flex-wrap: wrap;
+  }
+
+  .actions .btn {
+    flex: 1 1 100px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .brand {
+    flex-basis: 140px;
+  }
+
+  .brand small {
+    font-size: 9px;
+  }
+
+  .row-input {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .forecast-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+</style>
+</body>
+</html>
+
+</body>
+</html>
+
+
+
+
+  
+
+  
